@@ -3,9 +3,11 @@ import LoginForm from "../features/auth/LoginForm";
 
 export default function LoginPage() {
   return (
-    <div>
-      <LoginContent />
-      <LoginForm />
+    <div className="w-full flex flex-col justify-center items-center h-screen">
+      <div>
+        <LoginContent />
+        <LoginForm />
+      </div>
     </div>
   );
 }

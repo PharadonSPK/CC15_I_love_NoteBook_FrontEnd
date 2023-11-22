@@ -1,16 +1,18 @@
 import Route from "./router/route";
 import "./index.css";
+import AuthContextProvider from "./contexts/AuthContext";
+import ProductContextProvider from "./contexts/ProductContext";
+import CartContextProvider from "./contexts/CartContext";
 
 function App() {
   return (
-    <>
-      <Route />
-    </>
-
-    // <Sidebar handleChange={handleChange} />
-    // <Navigation query={query} handleInputChange={handleInputChange} />
-    // <Recommended handleClick={handleClick} />
-    // <Products result={result} />
+    <AuthContextProvider>
+      <ProductContextProvider>
+        <CartContextProvider>
+          <Route />
+        </CartContextProvider>
+      </ProductContextProvider>
+    </AuthContextProvider>
   );
 }
 

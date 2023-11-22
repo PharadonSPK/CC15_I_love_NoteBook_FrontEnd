@@ -22,21 +22,20 @@ export default function LoginForm() {
   });
   const navigate = useNavigate();
   const { login } = useAuth();
-  console.log(input);
+  // console.log(input);
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-
       const { value, error } = schema.validate(input);
       console.log(value);
-      // login(value)
-      // if (error===undefined){
-      //   alert()
-      // }
 
-      await login(input);
-      // console.log(what);
+      login(input)
+        .then((e) => console.log(e))
+        .catch((err) => console.log(error))
+        .finally(() => {
+          navigate("/ProfileAdmin");
+        });
     } catch (err) {
       toast.error(err.response.data.message);
     }

@@ -1,6 +1,4 @@
-// import LoginForm from "../features/auth/LoginForm";
-
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Products from "../Products/Products";
 import Recommended from "../Recommended/Recommended";
 import Sidebar from "../Sidebar/Sidebar";
@@ -9,19 +7,19 @@ import Card from "../components/Card";
 import Nav from "../Navigation/Nav";
 import { useCart } from "../contexts/CartContext";
 import axios from "../config/axios";
+//นำเข้าส่วนประกอบ React, hooks ( useEffect, useState) และการพึ่งพาภายนอกที่จำเป็น เช่น Axios สำหรับการส่งคำขอ HTTP
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const { cart, setCart } = useCart();
 
-  // ----------- Input Filter -----------
+  //Input Filter
   const [query, setQuery] = useState("");
-  const { allProduct, setAllProduct } = useProduct();
-
+  const { allProduct, setAllProduct, getAllProduct } = useProduct();
+  // ตัวแปรสถานะถูกประกาศโดยใช้useState ซึ่งรวมถึงselectedCategory, query
+  //ตัวแปรจาก hooks useCartและuseProductแบบกำหนดเอง
   useEffect(() => {
-    // setAllProduct();
-    // allProduct();
-    //console.log("eiei");
+    getAllProduct();
   }, []);
 
   const handleInputChange = (event) => {
@@ -32,35 +30,38 @@ export default function HomePage() {
     (product) =>
       product.description.toLowerCase().indexOf(query.toLowerCase()) !== -1
   );
+  //อาร์เรย์filteredItemsถูกสร้างขึ้นโดยการกรองผลิตภัณฑ์ตามอินพุต
 
-  // ----------- Radio Filtering -----------
+  //Radio Filtering
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
 
-  // ------------ Button Filtering -----------
+  //Button Filtering
   const handleClick = (event) => {
     setSelectedCategory(event.target.value);
   };
-
+  // ฟังก์ชันตัวจัดการเหตุการณ์ ว้สำหรับการเปลี่ยนแปลงอินพุต การเปลี่ยนแปลงปุ่มตัวเลือก และการคลิกปุ่ม ฟังก์ชันเหล่านี้จะอัพเดตตัวแปรสถานะที่เกี่ยวข้อง
   function filteredData(products, selected, query) {
     let filteredProducts = products;
-
-    // Filtering Input Items
     if (query) {
       filteredProducts = filteredItems;
+      // อาร์เรย์filteredItemsถูกสร้างขึ้นโดยการกรองผลิตภัณฑ์ตามอินพุต
     }
+
     const addToCart = (productId) => {
       axios
         .post("/cart", { productId: productId, quantity: 1 })
         .then((res) => {
           console.log(res.data.cart);
+          // alert("Success");
         })
         .catch((err) => {
           console.log(err);
         });
+      // ฟังก์ชันaddToCartส่งคำขอ POST ไปยังปลายทาง "/cart" โดยเพิ่มผลิตภัณฑ์ลงในรถเข็นของผู้ใช้ การตอบกลับถูกบันทึกลงในคอนโซล
     };
-    // Applying selected filter
+    //Applying selected filter
     if (selected) {
       filteredProducts = filteredProducts.filter(
         ({ brand, name, price, description }) =>
@@ -84,15 +85,14 @@ export default function HomePage() {
   }
 
   const result = filteredData(allProduct, selectedCategory, query);
-
+  // ฟังก์ชันfilteredDataจะใช้อาร์เรย์ของผลิตภัณฑ์ หมวดหมู่ที่เลือก และแบบสอบถามเป็นพารามิเตอร์ โดยจะกรองผลิตภัณฑ์ตามพารามิเตอร์ และส่งกลับอาร์เรย์ใหม่
   return (
-    // <h1>Hello World!</h1>
-
     <div>
       <Sidebar handleChange={handleChange} />
-      <Nav query={query} handleInputChange={handleInputChange} />
+      {/* <Nav query={query} handleInputChange={handleInputChange} /> */}
       <Recommended handleClick={handleClick} />
       <Products result={result} />
     </div>
   );
+  // ส่วนประกอบจะเรนเดอร์ส่วนประกอบ UI ต่างๆ
 }

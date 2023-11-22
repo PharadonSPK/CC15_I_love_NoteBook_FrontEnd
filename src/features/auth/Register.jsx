@@ -1,6 +1,7 @@
 import React from "react"; //rfc
-import Joi from "joi";
+import Joi from "joi"; //การนำเข้า Joi สำหรับการตรวจสอบอินพุต
 import axios from "axios";
+import "./Register.css";
 import { useState } from "react";
 
 const schema = Joi.object({
@@ -23,18 +24,32 @@ export default function Register() {
     confirmPassword: "",
     password: "",
   });
+
+  const [error, setError] = useState({
+    firstName: "",
+    lastName: "",
+    emailOrPhoneNumber: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   function handleSubmitForm(e) {
     e.preventDefault(); //กดซับมิทไม่รีเฟชหน้าให้
-    const { value, error } = schema.validate(input);
+    const { value, error } = schema.validate(input, { abortEarly: false });
     console.log(value, error);
     if (error) {
-      return alert("I kawaei");
+      const result = error.details.reduce((acc, el) => {
+        const { message, path } = el;
+        acc[path[0]] = message;
+        return acc;
+      }, {});
+      return setError(result);
     }
     axios.post("http://localhost:8888/auth/register", value);
   }
-  //   console.log(input);
+  // console.log(error.confirmPassword);
   return (
-    <div className="wrapper">
+    <div className="wrapper w-full flex flex-col justify-center items-center h-screen">
       <form onSubmit={handleSubmitForm}>
         <h1>Register</h1>
 
@@ -42,7 +57,7 @@ export default function Register() {
           <div className="input-field">
             <input
               type="text"
-              placeholder="firstName"
+              placeholder="FirstName"
               required
               onChange={(e) =>
                 setInput({ ...input, firstName: e.target.value })
@@ -82,8 +97,14 @@ export default function Register() {
               onChange={(e) => setInput({ ...input, password: e.target.value })}
             />
           </div>
-          <div className="input-field">
+          <div
+            className={`input-field ${
+              error.confirmPassword ? `bg-red-500` : `bg-[skyblue]`
+            }`}
+          >
             <input
+              // className={`${error.confirmPassword ? null: alert(122)}`}
+              // className="bg-red-500"
               type="password"
               placeholder="ConfirmPassword"
               required

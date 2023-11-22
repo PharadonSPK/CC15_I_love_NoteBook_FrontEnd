@@ -1,7 +1,9 @@
 .sidebar-title {
   font-size: 22px;
   font-weight: normal;
+  /* น้ำหนักตัวอักษรปกติ */
   margin-bottom: 20px;
+  /* เว้นระยะล่าง 20px */
 }
 
 .sidebar-items {
@@ -14,15 +16,13 @@
   padding-left: 25px;
   margin-bottom: 12px;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  /* cursor ที่บอกว่าเมื่อชี้ (hover) จะเปลี่ยนรูปแบบเป็น pointer */
 }
 
 .sidebar-label-container input {
   position: absolute;
   opacity: 0;
+  /* input element ที่ถูกซ่อน (opacity: 0) และถูกให้ตำแหน่ง absolute */
   cursor: pointer;
 }
 
@@ -38,6 +38,7 @@
 
 .all {
   background: linear-gradient(blue, crimson);
+  /* ใช้ linear gradient จากสี blue ไปยัง crimson. */
 }
 
 .sidebar-label-container:hover input ~ .checkmark {
@@ -52,10 +53,12 @@
   content: "";
   position: absolute;
   display: none;
+  /* ระบุลักษณะของ pseudo-element :after ที่จะถูกใช้เพื่อแสดง icon หลังจาก .checkmark. */
 }
 
 .sidebar-label-container input:checked ~ .checkmark:after {
   display: block;
+  /* sidebar-label-container input ถูกเลือก, :after จะถูกแสดง (display: block) */
 }
 
 .sidebar-label-container .checkmark:after {

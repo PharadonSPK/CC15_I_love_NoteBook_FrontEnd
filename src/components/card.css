@@ -1,86 +1,63 @@
 .card-container {
     display: flex;
-    flex-wrap: wrap;
+    /* กำหนดให้ใช้ Flexbox ช่วยในการจัดการพื้นที่ และการจัดวางขององค์ประกอบใน layout ของหน้าเว็บ */
+    flex-wrap: wrap; 
+    /* กำหนดให้ลงบรรทัดใหม่ เมื่อขนาดไม่เพียงพอ  */
     margin-left: 20rem;
     z-index: -2;
-    max-width: 1190px;
+    /* กำหนดลำดับขององค์ประกอบในแกนแนวนอน ให้ลำดับอยู่ที่ -2 */
+    min-width: 1400px;
     padding: 17px;
     height: 100vh;
+    
   }
   
-  .card {
-    /* display:flex; */
-    
+  .pic {
+    display:flex;
     margin: 40px;
+    /* กำหนดขอบ */
     border: 2px solid lightblue;
     padding: 20px;
     cursor: pointer; 
     width: 300px;
-    height: 400px;
+    height: 430px;
     border-radius: 15px;
     /* background-color: lightblue; */
   }
 
-  .card:hover {
-    outline: 2px solid orange;
-  }
-    
     .price {
       display:flex;
       gap: 10px;
+      /* background-color: red; */
     }
-    .del {
-      margin-right:10px;
+
+    .cart {
+      border: 2px solid rgb(19, 19, 19);
+      /* border ขอบ ,2pxความหนาของขอบ ,solid เส้นทึบ ,สีดำ */
+      min-width: 100px;
+      /* min-width กำหนดความกว้างขั้นต่ำ */
+      /* padding พื้นที่ภายในขอบ */
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-radius: 15px;
+      margin: 40px; 
+
+    }
+
+    .cart:hover {
+      background-color: rgb(19, 19, 19);
+      color: white;
+      cursor: pointer;
+      /* cursor: pointer; มักใช้องค์ประกอบ HTML เช่นปุ่ม (button), ลิงค์ (link), */
     }
 
     .card-img {
-      width: 258px;
-      width: 258px;
-      margin-bottom: 1rem; 
+      width: 250px;
+      height: 258px;
     }
    
 
-    .bag-icon{
-      color: orange;
-    }
+
     
-    /* grid-template-columns: repeat(6, 1fr);
-   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));  */
-  /* grid-gap: 0.2rem ;  */
-  
-  
-  /* .item {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-   background-color: lightblue; 
-  transition: 0.3s;
-    padding: 2px;
-    outline: 1.5px solid lightblue;
-  }
-  
-  .item:hover {
-    outline: 2px solid orange;
-  }
-  
-  .card-img {
-    width: 100%;
-   width: 13rem;
-    margin-bottom: 1rem; 
-  }
-  
-  .card-title {
-    padding: 1rem;
-  }
-  
-  .card-price {
-    display: flex;
-    padding: 1rem;
-   margin-bottom: 100px; 
-    justify-content: space-between;
-    align-items: center; 
-  }
-  
-  .bag-icon {
-    color: orange;
-    padding: 2px;
-  } 
-   */

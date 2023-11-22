@@ -11,40 +11,51 @@ const Nav = ({ handleInputChange, query }) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
   return (
-    <nav>
+    <nav className="top-0 absolute py-10 w-full ">
       <div className="nav-container">
-        <input
+        {/* <input
           className="search-input"
           type="text"
           onChange={handleInputChange}
           value={query}
           placeholder="Enter your search Notebook."
-        />
+        /> */}
+        {/* <button
+          className="button-input"
+          onClick={handleInputChange}
+          value={query}
+        >
+          ok
+        </button> */}
       </div>
-      <div className="profile-container">
-        <a href="">
-          <AiOutlineShoppingCart className="nav-icons" onClick={() => {}} />
-        </a>
+      <div className="w-full">
+        <div className="profile-container flex translate- gap-5 w-ful justify-end">
+          <AiOutlineShoppingCart
+            className="display text-2xl"
+            onClick={() => {
+              navigate("/ProfilePage");
+            }}
+          />
 
-        <a href="">
           <FaHouseLock
-            className="nav-icons"
+            className="display text-2xl"
             onClick={() => {
               navigate("/login");
             }}
           />
-        </a>
-        <a href="">
-          <IoMdReverseCamera
-            className="nav-icons"
-            onClick={() => {
-              navigate("/register");
-            }}
-          />
-        </a>
-        <a href="">
-          <BsDoorOpenFill className="nav-icons" onClick={logout} />
-        </a>
+
+          <a href="">
+            <IoMdReverseCamera
+              className="display text-2xl"
+              onClick={() => {
+                navigate("/register");
+              }}
+            />
+          </a>
+          <a href="">
+            <BsDoorOpenFill className="display text-2xl" onClick={logout} />
+          </a>
+        </div>
       </div>
     </nav>
   );

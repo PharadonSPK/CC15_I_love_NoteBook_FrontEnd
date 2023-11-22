@@ -1,12 +1,17 @@
 .sidebar {
   width: 15%;
   position: fixed;
+  /* ทำให้ sidebar มีตำแหน่งที่คงที่ (fixed) โดยไม่ขยับตามการเลื่อนหน้าจอขึ้น-ลง หรือซ้าย-ขวา */
   height: 100%;
   border-right: 2px solid #e5e5e5;
   z-index: 3;
+  /* กำหนดค่า z-index เพื่อระบุลำดับการวาง (stacking order) ของsidebar เทียบกับองค์ประกอบอื่น ๆ บนหน้า */
   display: flex;
+  /*  กำหนด sidebar ให้มีลักษณะเป็น flex container */
   flex-direction: column;
+  /* แนวดิ่ง */
   align-items: center;
+  /* แนวนอน */
 }
 
 .logo-container {

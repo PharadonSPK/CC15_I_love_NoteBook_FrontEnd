@@ -2,6 +2,7 @@ import "./Brand.css";
 import Input from "../../components/Input";
 
 function Brand({ handleChange }) {
+  // ฟังก์ชันนี้มักถูกใช้เป็น event handler สำหรับเหตุการณ์เปลี่ยนแปลงค่าใน React
   return (
     <div>
       <h2 className="sidebar-title">Brand</h2>
